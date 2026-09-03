@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise 🎀</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  overflow:hidden;
+  background:#f9eaf5;
+  color:#70445a;
+}
+
+.screen{
+  width:100vw;
+  height:100vh;
+  min-height:100dvh;
+  display:none;
+  position:relative;
+  overflow:hidden;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+.screen.active{
+  display:flex;
+}
+
+
+/* =========================
+   PASSWORD SCREEN
+========================= */
+
+#passwordScreen{
+  background:
+    radial-gradient(circle at 15% 85%,#f6b9d5 0%,transparent 30%),
+    radial-gradient(circle at 85% 10%,#ffd39b 0%,transparent 32%),
+    linear-gradient(135deg,#f7e5f3,#eee5fb);
+}
+
+.ribbon{
+  position:absolute;
+  top:35px;
+  left:35px;
+  font-size:50px;
+  transform:rotate(-15deg);
+}
+
+.photo-box{
+  width:260px;
+  height:320px;
+  padding:10px;
+  background:white;
+  border-radius:6px;
+  box-shadow:0 18px 40px rgba(130,70,100,.25);
+  transform:rotate(-3deg);
+}
+
+.photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:3px;
+}
+
+.pass-title{
+  margin-top:25px;
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:bold;
+  color:#73495d;
+  text-align:center;
+}
+
+.pass-boxes{
+  display:flex;
+  gap:10px;
+  margin:18px 0;
+}
+
+.pass-box{
+  width:48px;
+  height:52px;
+  background:rgba(255,255,255,.75);
+  border:1px solid white;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:23px;
+  color:#e87aa6;
+  box-shadow:0 5px 15px rgba(160,90,125,.12);
+}
+
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,62px);
+  gap:10px;
+}
+
+.key{
+  height:52px;
+  border:none;
+  border-radius:17px;
+  background:rgba(255,255,255,.72);
+  color:#805267;
+  font-size:18px;
+  font-weight:bold;
+  box-shadow:
+    0 5px 15px rgba(130,70,100,.12),
+    inset 0 1px 0 white;
+}
+
+.key:active{
+  transform:scale(.92);
+}
+
+.error{
+  height:22px;
+  margin-top:10px;
+  color:#dc547f;
+  font-size:14px;
+}
+
+
+/* =========================
+   FLOWER SCREEN
+========================= */
+
+#flowerScreen{
+  background:
+    radial-gradient(circle at center,#ffdce9,#f5bdd7);
+}
+
+.flower{
+  position:absolute;
+  font-size:52px;
+  animation:flowerMove 2.8s ease-out forwards;
+  filter:drop-shadow(0 4px 5px rgba(150,60,100,.25));
+}
+
+@keyframes flowerMove{
+
+  0%{
+    opacity:0;
+    transform:scale(.1) rotate(-180deg);
+  }
+
+  60%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1.2) rotate(20deg);
+  }
+
+}
+
+
+/* =========================
+   LAMP SCREEN
+========================= */
+
+#lampScreen{
+  background:
+    radial-gradient(circle at 15% 85%,#f4b8d4,transparent 30%),
+    radial-gradient(circle at 85% 15%,#ffd79d,transparent 30%),
+    linear-gradient(135deg,#f8e6f3,#e9e0fa);
+}
+
+.lamp-holder{
+  position:relative;
+  width:200px;
+  height:330px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.lamp-wire{
+  width:4px;
+  height:70px;
+  background:#6f5361;
+}
+
+.cute-lamp{
+  width:110px;
+  height:110px;
+  background:#fff9ef;
+  border-radius:50% 50% 45% 45%;
+  position:relative;
+  box-shadow:
+    0 0 25px white,
+    0 0 60px #ffc8dd;
+}
+
+.lamp-eye{
+  width:8px;
+  height:8px;
+  background:#594650;
+  border-radius:50%;
+  position:absolute;
+  top:43px;
+}
+
+.left-eye{
+  left:33px;
+}
+
+.right-eye{
+  right:33px;
+}
+
+.lamp-smile{
+  position:absolute;
+  top:49px;
+  left:43px;
+  font-size:24px;
+  color:#684e59;
+}
+
+.string{
+  width:3px;
+  height:100px;
+  background:#806370;
+  position:relative;
+  cursor:pointer;
+  transition:.6s;
+}
+
+.string:after{
+  content:"";
+  position:absolute;
+  bottom:-17px;
+  left:50%;
+  transform:translateX(-50%);
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:#dc7da5;
+  box-shadow:0 4px 10px rgba(160,60,100,.4);
+}
+
+.string.pull{
+  height:160px;
+}
+
+.pull-text{
+  margin-top:15px;
+  color:#86546a;
+  font-family:Georgia,serif;
+  font-weight:bold;
+}
+
+
+/* =========================
+   GLASS SCREEN
+========================= */
+
+#glassScreen{
+  background:
+    radial-gradient(circle at 20% 80%,#f5b9d3,transparent 30%),
+    radial-gradient(circle at 90% 10%,#ffd59d,transparent 30%),
+    linear-gradient(135deg,#f8e8f5,#e8e0fa);
+}
+
+.glass-btn{
+  padding:22px 38px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:25px;
+  background:rgba(255,255,255,.42);
+  backdrop-filter:blur(15px);
+  color:#815268;
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:bold;
+  box-shadow:0 15px 35px rgba(130,70,100,.2);
+  animation:slideIn 1.2s forwards;
+}
+
+@keyframes slideIn{
+  from{
+    transform:translateX(100vw);
+  }
+
+  to{
+    transform:translateX(0);
+  }
+}
+
+
+/* =========================
+   CAKE SCREEN
+========================= */
+
+#cakeScreen{
+  background:
+    radial-gradient(circle at 10% 90%,#f5b8d3,transparent 30%),
+    radial-gradient(circle at 90% 10%,#ffd49c,transparent 30%),
+    linear-gradient(135deg,#f8e7f3,#e9e0fb);
+}
+
+.cake-title{
+  font-family:Georgia,serif;
+  font-size:25px;
+  font-weight:bold;
+  color:#774b60;
+  margin-bottom:8px;
+  text-align:center;
+}
+
+.cake-subtitle{
+  font-size:14px;
+  color:#a7798e;
+  margin-bottom:10px;
+}
+
+.cake{
+  position:relative;
+  width:260px;
+  height:180px;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+.cake-top{
+  position:absolute;
+  top:35px;
+  left:15px;
+  width:230px;
+  height:65px;
+  border-radius:50%;
+  background:#f6b2d0;
+  border:3px solid #dd7fa8;
+}
+
+.cake-body{
+  position:absolute;
+  top:65px;
+  left:15px;
+  width:230px;
+  height:95px;
+  border-radius:0 0 28px 28px;
+  background:#f3a4c5;
+  border:3px solid #dd7fa8;
+  box-shadow:inset 0 -15px #e88cb4;
+}
+
+.cream{
+  position:absolute;
+  top:72px;
+  left:25px;
+  width:210px;
+  height:28px;
+  border-radius:20px;
+  background:#fff5f8;
+  z-index:2;
+}
+
+.candle{
+  position:absolute;
+  top:-28px;
+  left:118px;
+  width:24px;
+  height:65px;
+  border-radius:8px;
+  background:#ffd46d;
+  z-index:3;
+}
+
+.flame{
+  position:absolute;
+  top:-28px;
+  left:0;
+  font-size:27px;
+  animation:flicker .5s infinite alternate;
+}
+
+@keyframes flicker{
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.2);
+  }
+}
+
+.swipe-text{
+  margin-top:20px;
+  font-size:17px;
+  font-weight:bold;
+  color:#9c6178;
+}
+
+.cut-line{
+  position:absolute;
+  top:95px;
+  left:15px;
+  width:0;
+  height:5px;
+  background:white;
+  transition:1s;
+  z-index:10;
+}
+
+.cake.cut .cut-line{
+  width:230px;
+  transform:rotate(-10deg);
+}
+
+.cake.cut{
+  animation:cakeShake .4s;
+}
+
+@keyframes cakeShake{
+
+  25%{
+    transform:rotate(3deg);
+  }
+
+  50%{
+    transform:rotate(-3deg);
+  }
+
+  75%{
+    transform:rotate(2deg);
+  }
+
+  100%{
+    transform:rotate(0);
+  }
+
+}
+
+
+/* =========================
+   LETTER SCREEN
+========================= */
+
+#letterScreen{
+  background:
+    radial-gradient(circle at 10% 90%,#f5b8d3,transparent 30%),
+    radial-gradient(circle at 90% 10%,#ffd49c,transparent 30%),
+    linear-gradient(135deg,#f8e7f3,#e9e0fb);
+}
+
+.letter{
+  width:90%;
+  max-width:430px;
+  min-height:430px;
+  padding:30px;
+  background:transparent;
+  box-shadow:none;
+  text-align:center;
+}
+
+.letter h2{
+  color:#9b5b75;
+  font-family:Georgia,serif;
+  margin-bottom:40px;
+  font-size:24px;
+}
+
+.envelope{
+  width:230px;
+  height:155px;
+  background:#fffafa;
+  margin:auto;
+  position:relative;
+  border-radius:6px;
+  box-shadow:0 15px 35px rgba(120,70,90,.25);
+  cursor:pointer;
+  transition:.5s;
+}
+
+.envelope:active{
+  transform:scale(.94);
+}
+
+.envelope-flap{
+  position:absolute;
+  width:0;
+  height:0;
+  top:0;
+  left:0;
+  border-left:115px solid transparent;
+  border-right:115px solid transparent;
+  border-top:85px solid #f7e5eb;
+}
+
+.wax-seal{
+  position:absolute;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#d94b7d;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  top:65px;
+  left:93px;
+  z-index:3;
+  box-shadow:0 5px 15px rgba(130,30,70,.4);
+}
+
+.message{
+  display:none;
+  line-height:1.7;
+  font-size:16px;
+  margin-top:35px;
+  background:#fffdfd;
+  padding:20px;
+  border-radius:18px;
+  color:#75495d;
+  box-shadow:0 10px 30px rgba(130,70,100,.18);
+}
+
+
+/* =========================
+   CELEBRATION
+========================= */
+
+#celebrateScreen{
+  background:linear-gradient(135deg,#f8e7f3,#fff7fb);
+}
+
+.celebrate-title{
+  font-size:27px;
+  color:#d45c88;
+  margin-bottom:25px;
+  text-align:center;
+}
+
+.small-photo{
+  width:190px;
+  height:230px;
+  object-fit:cover;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(150,70,110,.3);
+}
+
+.balloon{
+  position:absolute;
+  font-size:55px;
+  animation:balloonUp 4s ease-in forwards;
+}
+
+@keyframes balloonUp{
+  from{
+    bottom:-100px;
+  }
+
+  to{
+    bottom:110vh;
+  }
+}
+
+.memory-btn{
+  margin-top:30px;
+  padding:15px 28px;
+  border:0;
+  border-radius:25px;
+  background:#f5a9c5;
+  color:white;
+  font-size:17px;
+}
+
+
+/* =========================
+   MEMORIES
+========================= */
+
+#memoriesScreen{
+  background:linear-gradient(135deg,#ffe7f1,#fff8fb);
+}
+
+.memory-title{
+  position:absolute;
+  top:30px;
+  font-size:27px;
+  color:#d45c88;
+}
+
+.gallery{
+  width:280px;
+  height:360px;
+  position:relative;
+  perspective:1000px;
+}
+
+.card{
+  position:absolute;
+  width:250px;
+  height:320px;
+  left:15px;
+  top:20px;
+  padding:8px;
+  background:white;
+  border-radius:22px;
+  box-shadow:0 15px 40px rgba(150,80,120,.25);
+  transition:.6s;
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:16px;
+}
+
+.gallery-controls{
+  display:flex;
+  gap:15px;
+}
+
+.gallery-controls button{
+  border:0;
+  border-radius:20px;
+  padding:12px 20px;
+  background:#f5a9c5;
+  color:white;
+  font-size:16px;
+}
+
+.final-text{
+  margin-top:18px;
+  color:#a05576;
+  font-weight:bold;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- PASSWORD -->
+
+<section id="passwordScreen" class="screen active">
+
+<div class="ribbon">🎀</div>
+
+<div class="photo-box">
+<img src="photo1.jpg" alt="Our photo">
+</div>
+
+<div class="pass-title">
+Enter the secret password 💗
+</div>
+
+<div class="pass-boxes">
+
+<div class="pass-box" id="p1"></div>
+<div class="pass-box" id="p2"></div>
+<div class="pass-box" id="p3"></div>
+<div class="pass-box" id="p4"></div>
+
+</div>
+
+<div class="keypad">
+
+<button class="key" onclick="press('1')">1</button>
+<button class="key" onclick="press('2')">2</button>
+<button class="key" onclick="press('3')">3</button>
+
+<button class="key" onclick="press('4')">4</button>
+<button class="key" onclick="press('5')">5</button>
+<button class="key" onclick="press('6')">6</button>
+
+<button class="key" onclick="press('7')">7</button>
+<button class="key" onclick="press('8')">8</button>
+<button class="key" onclick="press('9')">9</button>
+
+<button class="key" onclick="clearPass()">C</button>
+<button class="key" onclick="press('0')">0</button>
+<button class="key" onclick="backspace()">⌫</button>
+
+</div>
+
+<div class="error" id="error"></div>
+
+</section>
+
+
+<!-- FLOWERS -->
+
+<section id="flowerScreen" class="screen"></section>
+
+
+<!-- LAMP -->
+
+<section id="lampScreen" class="screen">
+
+<div class="lamp-holder">
+
+<div class="lamp-wire"></div>
+
+<div class="cute-lamp">
+
+<div class="lamp-eye left-eye"></div>
+<div class="lamp-eye right-eye"></div>
+
+<div class="lamp-smile">⌣</div>
+
+</div>
+
+<div class="string"
+id="string"
+onclick="pullString()"></div>
+
+</div>
+
+<div class="pull-text">
+Pull the string 💗
+</div>
+
+</section>
+
+
+<!-- GLASS -->
+
+<section id="glassScreen" class="screen">
+
+<button class="glass-btn" onclick="touchGlass()">
+Touch me 💗
+</button>
+
+</section>
+
+
+<!-- CAKE -->
+
+<section id="cakeScreen" class="screen">
+
+<div class="cake-title">
+Swipe to Cut the Cake! 🎂
+</div>
+
+<div class="cake-subtitle">
+Drag your finger across the cake
+</div>
+
+<div class="cake" id="cake">
+
+<div class="candle">
+<div class="flame">🔥</div>
+</div>
+
+<div class="cake-top"></div>
+
+<div class="cream"></div>
+
+<div class="cake-body"></div>
+
+<div class="cut-line"></div>
+
+</div>
+
+<div class="swipe-text" id="swipeText">
+Swipe the cake! 🎂
+</div>
+
+</section>
+
+
+<!-- LETTER -->
+
+<section id="letterScreen" class="screen">
+
+<div class="letter">
+
+<h2>A Letter Just For You 💗</h2>
+
+<div class="envelope" onclick="openLetter()">
+
+<div class="envelope-flap"></div>
+
+<div class="wax-seal">
+💗
+</div>
+
+</div>
+
+<div class="message" id="message"></div>
+
+</div>
+
+</section>
+
+
+<!-- CELEBRATION -->
+
+<section id="celebrateScreen" class="screen">
+
+<div class="celebrate-title">
+A little surprise for you 🎈💗
+</div>
+
+<img class="small-photo" src="gallery1.jpg">
+
+<button class="memory-btn" onclick="showMemories()">
+See Memories 💗
+</button>
+
+</section>
+
+
+<!-- MEMORIES -->
+
+<section id="memoriesScreen" class="screen">
+
+<div class="memory-title">
+Our Memories 💗
+</div>
+
+<div class="gallery">
+
+<div class="card"><img src="gallery1.jpg"></div>
+<div class="card"><img src="gallery2.jpg"></div>
+<div class="card"><img src="gallery3.jpg"></div>
+<div class="card"><img src="gallery4.jpg"></div>
+<div class="card"><img src="gallery5.jpg"></div>
+<div class="card"><img src="gallery6.jpg"></div>
+
+</div>
+
+<div class="gallery-controls">
+
+<button onclick="prevMemory()">←</button>
+
+<button onclick="nextMemory()">→</button>
+
+</div>
+
+<div class="final-text">
+These memories are forever 💗
+</div>
+
+</section>
+
+
+<script>
+
+
+/* PASSWORD */
+
+const PASSWORD = "1234";
+
+let entered = "";
+
+function press(num){
+
+if(entered.length >= 4) return;
+
+entered += num;
+
+updateBoxes();
+
+if(entered.length === 4){
+
+setTimeout(checkPassword,300);
+
+}
+
+}
+
+
+function updateBoxes(){
+
+for(let i=1;i<=4;i++){
+
+document.getElementById("p"+i).textContent =
+entered[i-1] ? "●" : "";
+
+}
+
+}
+
+
+function clearPass(){
+
+entered = "";
+
+updateBoxes();
+
+document.getElementById("error").textContent = "";
+
+}
+
+
+function backspace(){
+
+entered = entered.slice(0,-1);
+
+updateBoxes();
+
+}
+
+
+function checkPassword(){
+
+if(entered === PASSWORD){
+
+document.getElementById("passwordScreen")
+.classList.remove("active");
+
+startFlowers();
+
+}else{
+
+document.getElementById("error").textContent =
+"Wrong password 💗";
+
+entered = "";
+
+updateBoxes();
+
+}
+
+}
+
+
+/* FLOWERS */
+
+function startFlowers(){
+
+const screen =
+document.getElementById("flowerScreen");
+
+screen.innerHTML = "";
+
+screen.classList.add("active");
+
+const flowers =
+["🌸","🌷","🌹","🌺","🌼","💐"];
+
+for(let i=0;i<70;i++){
+
+const f =
+document.createElement("div");
+
+f.className = "flower";
+
+f.textContent =
+flowers[Math.floor(Math.random()*flowers.length)];
+
+f.style.left =
+Math.random()*95 + "%";
+
+f.style.top =
+Math.random()*95 + "%";
+
+f.style.animationDelay =
+Math.random()*1.5 + "s";
+
+screen.appendChild(f);
+
+}
+
+setTimeout(()=>{
+
+screen.classList.remove("active");
+
+document.getElementById("lampScreen")
+.classList.add("active");
+
+},4500);
+
+}
+
+
+/* LAMP */
+
+function pullString(){
+
+const string =
+document.getElementById("string");
+
+string.classList.add("pull");
+
+setTimeout(()=>{
+
+document.getElementById("lampScreen")
+.classList.remove("active");
+
+document.getElementById("glassScreen")
+.classList.add("active");
+
+},1000);
+
+}
+
+
+/* GLASS */
+
+function touchGlass(){
+
+const btn =
+document.querySelector(".glass-btn");
+
+btn.style.transform = "scale(1.2)";
+
+setTimeout(()=>{
+
+document.getElementById("glassScreen")
+.classList.remove("active");
+
+document.getElementById("cakeScreen")
+.classList.add("active");
+
+},600);
+
+}
+
+
+/* CAKE */
+
+let startX = 0;
+let startY = 0;
+
+const cake =
+document.getElementById("cake");
+
+cake.addEventListener("touchstart",function(e){
+
+startX =
+e.touches[0].clientX;
+
+startY =
+e.touches[0].clientY;
+
+});
+
+
+cake.addEventListener("touchend",function(e){
+
+const endX =
+e.changedTouches[0].clientX;
+
+const endY =
+e.changedTouches[0].clientY;
+
+const distanceX =
+Math.abs(endX-startX);
+
+const distanceY =
+Math.abs(endY-startY);
+
+if(distanceX > 40 || distanceY > 40){
+
+cutCake();
+
+}
+
+});
+
+
+cake.addEventListener("mousedown",function(e){
+
+startX = e.clientX;
+
+});
+
+
+cake.addEventListener("mouseup",function(e){
+
+if(Math.abs(e.clientX-startX) > 40){
+
+cutCake();
+
+}
+
+});
+
+
+function cutCake(){
+
+if(cake.classList.contains("cut")) return;
+
+cake.classList.add("cut");
+
+document.getElementById("swipeText").textContent =
+'Happy Birthday! 💗';
+
+setTimeout(()=>{
+
+document.getElementById("cakeScreen")
+.classList.remove("active");
+
+document.getElementById("letterScreen")
+.classList.add("active");
+
+},2500);
+
+}
+
+
+/* LETTER */
+
+const birthdayWish =
+`Happy Birthday, Bow! 🌸✨
+
+আমার জীবনের সবচেয়ে prettiest chapter তুমি। Stay happy and keep shining always! Love you endlessly. ❤️
+
+Shuvo Birthday, Bow! 💖✨
+
+তোমার হাসিটাই আমার world-কে bright করে দেয়। Thank you for being my safe space! 🌙💫
+
+Happy Birthday to my sunshine, Bow! ☀️💛
+
+তুমি আছো বলেই সব কিছু এত aesthetic! Wish you all the happiness in the world! ✨`;
+
+function openLetter(){
+
+const message =
+document.getElementById("message");
+
+message.style.display = "block";
+
+message.textContent = "";
+
+let i = 0;
+
+const typing =
+setInterval(()=>{
+
+message.textContent +=
+birthdayWish[i];
+
+i++;
+
+if(i >= birthdayWish.length){
+
+clearInterval(typing);
+
+setTimeout(showCelebration,1200);
+
+}
+
+},30);
+
+}
+
+
+/* CELEBRATION */
+
+function showCelebration(){
+
+document.getElementById("letterScreen")
+.classList.remove("active");
+
+document.getElementById("celebrateScreen")
+.classList.add("active");
+
+for(let i=0;i<12;i++){
+
+const balloon =
+document.createElement("div");
+
+balloon.className =
+"balloon";
+
+balloon.textContent =
+["🎈","🎀","💗","🎈"][i%4];
+
+balloon.style.left =
+Math.random()*90 + "%";
+
+balloon.style.animationDelay =
+Math.random()*2 + "s";
+
+document.getElementById("celebrateScreen")
+.appendChild(balloon);
+
+}
+
+}
+
+
+/* MEMORIES */
+
+let memoryIndex = 0;
+
+function updateMemory(){
+
+const cards =
+document.querySelectorAll(".card");
+
+cards.forEach((card,i)=>{
+
+const diff =
+i-memoryIndex;
+
+card.style.transform =
+`translateX(${diff*25}px)
+translateY(${Math.abs(diff)*8}px)
+rotate(${diff*4}deg)
+scale(${1-Math.min(Math.abs(diff)*.05,.3)})`;
+
+card.style.zIndex =
+20-Math.abs(diff);
+
+card.style.opacity =
+Math.abs(diff)>3 ? "0" : "1";
+
+});
+
+}
+
+
+function nextMemory(){
+
+if(memoryIndex < 5){
+
+memoryIndex++;
+
+updateMemory();
+
+}
+
+}
+
+
+function prevMemory(){
+
+if(memoryIndex > 0){
+
+memoryIndex--;
+
+updateMemory();
+
+}
+
+}
+
+
+function showMemories(){
+
+document.getElementById("celebrateScreen")
+.classList.remove("active");
+
+document.getElementById("memoriesScreen")
+.classList.add("active");
+
+updateMemory();
+
+}
+
+
+</script>
+
+</body>
+</html>
