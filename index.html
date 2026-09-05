@@ -957,39 +957,22 @@ function startFlowers(){
 const screen =
 document.getElementById("flowerScreen");
 
-screen.innerHTML = "";
+const video =
+document.getElementById("flowerVideo");
+
+document.getElementById("passwordScreen")
+.classList.remove("active");
 
 screen.classList.add("active");
 
-const flowers =
-["🌸","🌷","🌹","🌺","🌼","💐"];
-
-for(let i=0;i<70;i++){
-
-const f =
-document.createElement("div");
-
-f.className = "flower";
-
-f.textContent =
-flowers[Math.floor(Math.random()*flowers.length)];
-
-f.style.left =
-Math.random()*95 + "%";
-
-f.style.top =
-Math.random()*95 + "%";
-
-f.style.animationDelay =
-Math.random()*1.5 + "s";
-
-screen.appendChild(f);
-
-}
+video.currentTime = 0;
+video.play();
 
 setTimeout(()=>{
 
 screen.classList.remove("active");
+
+video.pause();
 
 document.getElementById("lampScreen")
 .classList.add("active");
@@ -997,7 +980,6 @@ document.getElementById("lampScreen")
 },4500);
 
 }
-
 
 /* LAMP */
 
